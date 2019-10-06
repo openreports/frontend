@@ -1,3 +1,4 @@
+require('dotenv-flow').config()
 import path from 'path'
 import express, { Express } from 'express'
 import next from 'next'
