@@ -1,5 +1,6 @@
 import React from 'react';
 import App from 'next/app';
+import NavBar from '../components/NavBar';
 import '../styles/openreports.less';
 
 class OpenReportsApp extends App {
@@ -16,6 +17,7 @@ class OpenReportsApp extends App {
     const { Component, pageProps } = this.props
     return (
       <>
+        <NavBar />
         <Component {...pageProps} />
       </>
     )
