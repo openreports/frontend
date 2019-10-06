@@ -3,6 +3,6 @@ import routes from 'next-routes'
 const pages = new routes();
 
 pages
-  .add('home', '/', 'index')
+  .add('index', '/')
 
 export default pages
