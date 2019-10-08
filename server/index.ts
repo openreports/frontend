@@ -3,9 +3,6 @@ import path from 'path'
 import express, { Express } from 'express'
 import next from 'next'
 import Server from 'next-server/dist/server/next-server'
-import { HTTPHandler } from 'next-routes'
-
-import pages from './pages'
 
 const dev:boolean = process.env.NODE_ENV !== 'production';
 
@@ -20,9 +17,9 @@ const app:Server = next({
 
 app.prepare().then(() => {
 
-  const handler:HTTPHandler = pages.getRequestHandler(app)
-
-  server.use(handler)
+  server.use((req, res) => {
+    app.getRequestHandler()(req, res)
+  })
 
   server.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)

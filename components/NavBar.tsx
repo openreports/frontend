@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Navbar } from 'rsuite';
-import { Link } from '../server/pages';
+import Link from 'next/link';
 
 function NavBar () {
   return (
@@ -9,7 +9,7 @@ function NavBar () {
         <Navbar.Header>
           <Nav>
             <Nav.Item>
-              <Link route="/">
+              <Link href="/">
                 <a>
                   OpenReports
                 </a>
@@ -20,7 +20,7 @@ function NavBar () {
         <Navbar.Body>
           <Nav pullRight>
             <Nav.Item>
-              <Link route="/signup">
+              <Link href="/signup">
                 <a>
                   Signup
                 </a>

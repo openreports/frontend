@@ -6,7 +6,7 @@ module.exports = withLess({
   lessLoaderOptions: {
     javascriptEnabled: true
   },
-  publicRuntimeConfig: {
+  env: {
     API_URL
   },
 });
