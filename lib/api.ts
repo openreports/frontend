@@ -15,7 +15,7 @@ const Fetcher = {
       ...defaultOptions as any
     })
   ),
-  post: (path:string, data:any) => (
+  post: (path:string, data?:any) => (
     fetch(`${API_URL}${path}`, {
       method: 'POST',
       ...defaultOptions as any,

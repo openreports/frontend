@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar } from 'rsuite';
+import { Nav, Navbar, Dropdown } from 'rsuite';
 import Link from 'next/link';
 import AuthContainer from '../stores/auth'
 
@@ -23,13 +23,9 @@ function NavBar () {
           <Nav pullRight>
             {
               Auth.isAuthenticated ? (
-                <Nav.Item>
-                  <Link href="/signup">
-                    <a>
-                      Logout
-                    </a>
-                  </Link>
-                </Nav.Item>
+                <Dropdown title={Auth.name}>
+                  <Dropdown.Item onClick={Auth.logout}>Sign out</Dropdown.Item>
+                </Dropdown>
               ) : (
                 <Nav.Item>
                   <Link href="/signup">
