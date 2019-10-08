@@ -3,7 +3,7 @@
   "build": {
     "env": {
       "PORT": "4000",
-      "API_URL": "https://openreports-api.herokuapp.com/"
+      "API_URL": "https://openreports-api.herokuapp.com"
     }
   },
   "routes": [
