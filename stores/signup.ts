@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createContainer } from 'unstated-next';
 
-import { unAuthAPI } from '../lib/api';
+import api from '../lib/api';
 
 function signup () {
   let [details, setDetails] = useState({
@@ -23,16 +23,19 @@ function signup () {
   let submit = async () => {
     setLoading(true)
     try {
-      const res = await unAuthAPI.post('/users', details)
-      if (res.status === 201) {
+      const res = await api.post('/users', details)
+      const statusCode = res.status
+      const data = await res.json()
+      if (statusCode === 201) {
         setSuccess('Successfully created your account')
-        clearStatus()
+      } else {
+        setError(data.errorMessage || 'Something went wrong')
       }
     } catch (err) {
-      setError(err.response.data.errorMessage)
-      clearStatus()
-      console.error(err.response)
+      console.error(err)
+      setError(err.message)
     }
+    clearStatus()
     setLoading(false)
   }
 
