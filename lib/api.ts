@@ -1,8 +1,9 @@
 import axios from 'axios'
-import ENV from './env'
+
+const API_URL = process.env.API_URL
 
 const unAuthAPI = axios.create({
-  baseURL: ENV.API_URL,
+  baseURL: API_URL,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
