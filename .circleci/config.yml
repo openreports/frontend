@@ -1,0 +1,17 @@
+version: 2
+
+jobs:
+  build:client:
+    docker:
+      - image: circleci/node:12.11.0
+    steps:
+      - checkout
+      - run: npm ci --ignore-scripts
+      - run: npm run build:client
+  build:server:
+    docker:
+      - image: circleci/node:12.11.0
+    steps:
+      - checkout
+      - run: npm ci --ignore-scripts
+      - run: npm run build:server
