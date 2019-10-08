@@ -15,3 +15,10 @@ jobs:
       - checkout
       - run: npm ci --ignore-scripts
       - run: npm run build:server
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build-client
+      - build-server
