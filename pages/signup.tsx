@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert, Button, Panel, Form, FormGroup, ControlLabel, FormControl, Grid, Row, Col } from 'rsuite';
 import SignupContainer from '../stores/signup';
 
-function Signup() {
+const Signup:React.FC = () => {
   const Signup = SignupContainer.useContainer()
   if (Signup.success && Signup.success !== '' && !Signup.loading) {
     Alert.success(Signup.success, 3000)
@@ -41,12 +41,4 @@ function Signup() {
   )
 }
 
-function SignupPage () {
-  return (
-    <SignupContainer.Provider>
-      <Signup />
-    </SignupContainer.Provider>
-  )
-}
-
-export default SignupPage
+export default Signup

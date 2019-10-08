@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { createContainer } from 'unstated-next';
 
 import api from '../lib/api';
+import AuthContainer from './auth';
 
 function signup () {
+  const Auth = AuthContainer.useContainer()
   let [details, setDetails] = useState({
     name: '',
     email: '',
@@ -13,7 +15,7 @@ function signup () {
   let [success, setSuccess] = useState('')
   let [error, setError] = useState('')
 
-  let handleChange = (name, value) => (
+  let handleChange = (name:string, value:string) => (
     setDetails({
       ...details,
       [name]: value
@@ -27,6 +29,8 @@ function signup () {
       const statusCode = res.status
       const data = await res.json()
       if (statusCode === 201) {
+        Auth.handleName(data.name)
+        Auth.handleAuth(true)
         setSuccess('Successfully created your account')
       } else {
         setError(data.errorMessage || 'Something went wrong')

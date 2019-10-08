@@ -4,6 +4,8 @@ import { Container, Header, Content } from 'rsuite';
 import NavBar from '../components/NavBar';
 import '../styles/openreports.less';
 
+import Providers from '../components/Providers'
+
 class OpenReportsApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
@@ -17,14 +19,16 @@ class OpenReportsApp extends App {
   render () {
     const { Component, pageProps } = this.props
     return (
-      <Container>
-        <Header>
-          <NavBar />
-        </Header>
-        <Content>
-          <Component {...pageProps} />
-        </Content>
-      </Container>
+      <Providers>
+        <Container>
+          <Header>
+            <NavBar />
+          </Header>
+          <Content>
+            <Component {...pageProps} />
+          </Content>
+        </Container>
+      </Providers>
     )
   }
 }
