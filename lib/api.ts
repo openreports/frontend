@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch'
 const API_URL = process.env.API_URL || 'https://openreports-api.herokuapp.com/'
 
 const defaultOptions = {
@@ -15,13 +16,15 @@ const Fetcher = {
       ...defaultOptions as any
     })
   ),
-  post: (path:string, data?:any) => (
-    fetch(`${API_URL}${path}`, {
+  post: (path:string, options?:any) => {
+    const { body, ...rest } = options
+    return fetch(`${API_URL}${path}`, {
       method: 'POST',
       ...defaultOptions as any,
-      body: JSON.stringify(data)
+      ...rest,
+      body: JSON.stringify(body || options)
     })
-  )
+  }
 }
 
 export default Fetcher
