@@ -10,8 +10,7 @@ const Auth = (props:Props) => {
   const Auth = AuthContainer.useContainer()
 
   const check = async () => {
-    const res = await api.post('/auth', {
-    })
+    const res = await api.get('/auth')
     
     const data = await res.json()
   

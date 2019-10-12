@@ -27,6 +27,7 @@ function NavBar () {
                   <Dropdown.Item onClick={Auth.logout}>Sign out</Dropdown.Item>
                 </Dropdown>
               ) : (
+                <>
                 <Nav.Item>
                   <Link href="/signup">
                     <a>
@@ -34,6 +35,14 @@ function NavBar () {
                     </a>
                   </Link>
                 </Nav.Item>
+                <Nav.Item>
+                  <Link href="/login">
+                    <a>
+                      Login
+                    </a>
+                  </Link>
+                </Nav.Item>
+                </>
               )
             }
           </Nav>
