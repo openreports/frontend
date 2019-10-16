@@ -3,6 +3,7 @@ import React from 'react'
 import SignupContainer from '../stores/signup'
 import AuthContainer from '../stores/auth'
 import LoginContainer from '../stores/login'
+import OnboardingContainer from '../stores/onboarding'
 
 interface Props {
   children: React.ReactNode
@@ -13,7 +14,9 @@ const Providers: React.FC<Props> = (props) => {
     <AuthContainer.Provider>
       <SignupContainer.Provider>
         <LoginContainer.Provider>
-          {props.children}
+          <OnboardingContainer.Provider>
+            {props.children}
+          </OnboardingContainer.Provider>
         </LoginContainer.Provider>
       </SignupContainer.Provider>
     </AuthContainer.Provider>
