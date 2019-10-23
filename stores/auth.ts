@@ -5,10 +5,15 @@ import api from '../lib/api';
 
 function auth () {
   let [name, setName] = useState('')
+  let [project, setProject] = useState('')
   let [isAuthenticated, setIsAuthenticated] = useState(false)
 
   let handleName = (username:string) => {
     setName(username)
+  }
+
+  let handleProject = (project:string) => {
+    setProject(project)
   }
 
   let handleAuth = (is:boolean) => {
@@ -34,7 +39,9 @@ function auth () {
     isAuthenticated,
     handleName,
     handleAuth,
-    logout
+    logout,
+    project,
+    handleProject
   }
 }
 

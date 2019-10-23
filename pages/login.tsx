@@ -1,12 +1,18 @@
 import React from 'react';
+import { NextPage, NextPageContext } from 'next';
+import cookies from 'next-cookies';
+import Router from 'next/router';
 import { Alert, Button, Panel, Form, FormGroup, ControlLabel, FormControl, Grid, Row, Col } from 'rsuite';
 
+import AuthContainer from '../stores/auth';
 import LoginContainer from '../stores/login';
 
-const LoginPage:React.FC = () => {
+const LoginPage:NextPage<{}> = () => {
   const Login = LoginContainer.useContainer()
+  const Auth = AuthContainer.useContainer()
   if (Login.success && Login.success !== '' && !Login.loading) {
     Alert.success(Login.success, 3000)
+    Auth.project ? Router.push('/') : Router.push('/onboarding')
   }
 
   if (Login.error && !Login.loading) {
@@ -36,6 +42,25 @@ const LoginPage:React.FC = () => {
       </Row>
     </Grid>
   )
+}
+
+LoginPage.getInitialProps = async (ctx:NextPageContext) => {
+  const { res } = ctx
+  const { token, name, project} = cookies(ctx)
+  if (token && name && res) {
+    if (project) {
+      res.writeHead(302, {
+        Location: '/'
+      })
+      res.end()
+    } else {
+      res.writeHead(302, {
+        Location: '/onboarding'
+      })
+      res.end()
+    }
+  }
+  return { }
 }
 
 export default LoginPage

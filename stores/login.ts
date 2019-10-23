@@ -30,6 +30,7 @@ function login () {
       if (statusCode === 201) {
         Auth.handleName(data.user.name)
         Auth.handleAuth(true)
+        Auth.handleProject(data.user.project)
         setSuccess('Successfully logged in to you account')
       } else {
         setError(data.errorMessage || 'Something went wrong')

@@ -1,10 +1,14 @@
 import React from 'react';
+import { NextPage, NextPageContext } from 'next';
+import cookies from 'next-cookies';
+import Router from 'next/router';
 import { Alert, Button, Panel, Form, FormGroup, ControlLabel, FormControl, Grid, Row, Col } from 'rsuite';
 import SignupContainer from '../stores/signup';
 
-const SignupPage:React.FC = () => {
+const SignupPage:NextPage<{}> = () => {
   const Signup = SignupContainer.useContainer()
   if (Signup.success && Signup.success !== '' && !Signup.loading) {
+    Router.push('/onboarding')
     Alert.success(Signup.success, 3000)
   }
 
@@ -39,6 +43,24 @@ const SignupPage:React.FC = () => {
       </Row>
     </Grid>
   )
+}
+
+SignupPage.getInitialProps = async (ctx:NextPageContext) => {
+  const { res } = ctx
+  const { token, name, project } = cookies(ctx)
+  if (token && name && res) {
+    if (project) {
+      res.writeHead(302, {
+        Location: '/'
+      })
+    } else {
+      res.writeHead(302, {
+        Location: '/onboarding'
+      })
+    }
+    res.end()
+  }
+  return { }
 }
 
 export default SignupPage

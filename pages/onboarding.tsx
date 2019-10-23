@@ -1,11 +1,15 @@
 import React from 'react';
+import { NextPage, NextPageContext } from 'next';
+import cookies from 'next-cookies';
+import Router from 'next/router';
 import { Alert, Button, Panel, Form, FormGroup, ControlLabel, FormControl, Grid, Row, Col, SelectPicker, Toggle } from 'rsuite';
 
 import OnboardingContainer from '../stores/onboarding';
 
-const OnboardingPage:React.FC = () => {
+const OnboardingPage:NextPage = () => {
   const Onboarding = OnboardingContainer.useContainer()
   if (Onboarding.success && Onboarding.success !== '' && !Onboarding.loading) {
+    Router.push('/')
     Alert.success(Onboarding.success, 3000)
   }
 
@@ -59,6 +63,25 @@ const OnboardingPage:React.FC = () => {
       </Row>
     </Grid>
   )
+}
+
+OnboardingPage.getInitialProps = async (ctx:NextPageContext) => {
+  const { res } = ctx
+  const { token, name, project } = cookies(ctx)
+  if (token && name && res) {
+    if (project) {
+      res.writeHead(302, {
+        Location: '/'
+      })
+      res.end()
+    }
+  } else if ((!token || !name) && res) {
+    res.writeHead(302, {
+      Location: '/login'
+    })
+    res.end()
+  }
+  return { }
 }
 
 export default OnboardingPage
