@@ -41,8 +41,8 @@ const OnboardingPage:NextPage = () => {
                     { label: 'Feedback System', value: 'FEEDBACK' },
                     { label: 'Feature Request', value: 'FEATURE' }
                   ]}
-                  defaultValue="ISSUE"
-                  disabledItemValues={['API', 'FEEDBACK', 'FEATURE' ]}
+                  defaultValue="API"
+                  disabledItemValues={['ISSUE', 'FEEDBACK', 'FEATURE' ]}
                   block
                 />
               </FormGroup>
